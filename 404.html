@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Destination Not Found | Stackly</title>
+  <meta name="description" content="Looks like this travel route or destination has wandered off the map. Return to Stackly Homepage.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+  <!-- Lenis Smooth Scroll CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* Dark Theme Scrollbar */
+    html {
+      scrollbar-color: #0284c7 #0f172a;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0284c7;
+      border: 2px solid #0f172a;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0369a1;
+    }
+
+    body.error-page-body {
+      background: radial-gradient(circle at 50% 30%, #1e293b 0%, #0f172a 70%, #020617 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      padding: 2rem 1.5rem;
+      box-sizing: border-box;
+      font-family: var(--font-sans);
+    }
+
+    /* Ambient glow & floating travel decorations */
+    .error-ambient-glow {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(2, 132, 199, 0.18) 0%, rgba(15, 23, 42, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .error-floating-icon {
+      position: absolute;
+      color: rgba(56, 189, 248, 0.12);
+      pointer-events: none;
+      z-index: 1;
+      animation: floatBadge 6s ease-in-out infinite alternate;
+    }
+
+    .error-card {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      width: 100%;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-xl);
+      padding: 3.5rem 2.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .error-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+
+    .error-brand i {
+      color: var(--accent);
+      font-size: 1.6rem;
+      background: rgba(2, 132, 199, 0.2);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .error-numeral {
+      font-size: clamp(5.5rem, 14vw, 8.5rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 40px rgba(56, 189, 248, 0.2);
+      margin-bottom: 1.25rem;
+    }
+
+    .error-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.25rem;
+    }
+
+    .error-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .error-desc {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      max-width: 520px;
+      margin: 0 auto 2.25rem auto;
+      line-height: 1.65;
+    }
+
+    .error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn-error-back {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 26px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-error-back:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-error-home {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+      transition: var(--transition);
+    }
+
+    .btn-error-home:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+    }
+
+    .error-quick-links {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .error-quick-links span {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .error-quick-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .error-quick-links a:hover {
+      color: #38bdf8;
+    }
+
+    @media (max-width: 576px) {
+      .error-card {
+        padding: 2.2rem 1.25rem;
+      }
+      .error-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-error-back, .btn-error-home {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body.error-page-body {
+        padding: 1.25rem 0.75rem;
+      }
+      .error-card {
+        padding: 1.75rem 1rem;
+      }
+      .error-numeral {
+        font-size: 4.5rem;
+      }
+      .error-title {
+        font-size: 1.45rem;
+      }
+      .error-desc {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+      }
+      .error-quick-links {
+        font-size: 0.78rem;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body class="error-page-body">
+
+  <!-- Ambient Glow -->
+  <div class="error-ambient-glow"></div>
+
+  <!-- Decorative Floating Travel Elements -->
+  <i class="fa-solid fa-plane-departure error-floating-icon" style="top: 12%; left: 8%; font-size: 2.8rem; transform: rotate(-15deg);"></i>
+  <i class="fa-solid fa-earth-americas error-floating-icon" style="bottom: 15%; left: 10%; font-size: 2.4rem; animation-delay: -2s;"></i>
+  <i class="fa-solid fa-compass error-floating-icon" style="top: 15%; right: 10%; font-size: 2.6rem; transform: rotate(20deg); animation-delay: -3s;"></i>
+  <i class="fa-solid fa-cloud-sun error-floating-icon" style="bottom: 12%; right: 8%; font-size: 2.5rem; animation-delay: -1.5s;"></i>
+
+  <!-- Main Error Card -->
+  <main class="error-card" id="errorCard">
+    <!-- Brand Logo -->
+    <a href="index.html" class="error-brand" aria-label="Home" style="justify-content: center;">
+      <img src="assets/images/stackly_061.webp" alt="Logo" style="height: 48px; width: auto; display: block; margin: 0 auto;">
+    </a>
+
+    <!-- Eyebrow Tag -->
+    <div>
+      <span class="error-badge-pill">
+        <i class="fa-solid fa-route"></i> Waypoint Undiscovered
+      </span>
+    </div>
+
+    <!-- Giant 404 Numeral -->
+    <div class="error-numeral">404</div>
+
+    <!-- Main Heading -->
+    <h1 class="error-title">Destination Off The Map</h1>
+
+    <!-- Description -->
+    <p class="error-desc">
+      Looks like this travel route, hotel listing, or page has drifted off our navigation radar. Return to charted territory to continue planning your journey.
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="error-actions">
+      <button onclick="if(history.length > 1) { history.back(); } else { window.location.href='index.html'; }" class="btn-error-back">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>BACK</span>
+      </button>
+      <a href="index.html" class="btn-error-home">
+        <i class="fa-solid fa-house"></i>
+        <span>BACK TO HOME</span>
+      </a>
+    </div>
+
+    <!-- Quick Navigation Routes -->
+    <div class="error-quick-links">
+      <span>Suggested Routes:</span>
+      <a href="index.html#destinationsSection"><i class="fa-solid fa-location-dot"></i> Destinations</a>
+      <a href="index.html#hotelsSection"><i class="fa-solid fa-hotel"></i> Hotels</a>
+      <a href="index.html#offersSection"><i class="fa-solid fa-percent"></i> Offers</a>
+      <a href="index.html#contactSection"><i class="fa-solid fa-headset"></i> Contact Us</a>
+    </div>
+  </main>
+
+  <!-- GSAP Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- AOS (Animate on Scroll) JS via cdnjs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Lenis Smooth Scrolling Animation -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // AOS Initialization with mirror animation
+      if (window.AOS) {
+        AOS.init({
+          duration: 800,
+          once: false,
+          mirror: true
+        });
+      }
+
+      // Lenis Smooth Scroll
+      if (typeof window.Lenis !== 'undefined') {
+        const lenis = new Lenis({
+          duration: 1.1,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothTouch: false
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+
+      if (typeof gsap !== 'undefined') {
+        gsap.from('#errorCard', {
+          opacity: 0,
+          y: 40,
+          scale: 0.96,
+          duration: 0.9,
+          ease: 'power3.out'
+        });
+
+        gsap.from('.error-floating-icon', {
+          opacity: 0,
+          scale: 0.5,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: 'back.out(1.7)'
+        });
+      }
+    });
+  </script>
+</body>
+</html>
